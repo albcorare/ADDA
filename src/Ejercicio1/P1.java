@@ -76,34 +76,54 @@ public class P1 {
 
 	}
 
-	
-	 /* public static String EjJava10(List<String> ls) {
-		  return IntStream.rangeClosed(0,ls.size()-1)
-				  .boxed()
-				  .filter(x-> String.valueOf(cuentaMinusculas(ls.get(x))))
-				  .collect(Collectors.joining());
-	  }
+	/*
+	 * public static String EjJava10(List<String> ls) { return
+	 * IntStream.rangeClosed(0,ls.size()-1) .boxed() .filter(x->
+	 * String.valueOf(cuentaMinusculas(ls.get(x)))) .collect(Collectors.joining());
+	 * }
 	 */
 
 	/*
 	 * public static String ejemploY(List<String> ls){ return ls.stream()
 	 * .max(Comparator.comparing(Ejemplos::ejemploX)) .get(); }
 	 */
+	/*
+	 * public static Integer cuentaMinRec(String n) { Integer a = 0; Integer i = 0;
+	 * if (n.length() == i) { return a; } else if
+	 * (!(Character.isUpperCase(n.charAt(i)))) { a = a + 1; i = i + 1; return
+	 * cuentaMinRec(n); } else { i = i + 1; return cuentaMinRec(n); } }
+	 */
+	public static Integer cuentaMinRec(String n, Integer a, Integer i) {
+		if (n.length() == i) {
+			return a;
+		}else if (!(Character.isUpperCase(n.charAt(i)))) {
+			return cuentaMinRec(n, a + 1, i + 1);
+		} else {
+			return cuentaMinRec(n, a, i + 1);
+		}
+	}
+	
 
 	public static String Ej1RecFinal(List<String> ls, String g, Integer i) {
 		if (ls.size() == 1) {
 			return ls.get(i);
-		} else if (i < ls.size() - 1) {
+		}else if(ls.size()-1 == i) {
 			return g;
+		}else if (cuentaMinRec(ls.get(i), 0, 0) < cuentaMinRec(ls.get(i + 1), 0, 0)) {
+			if(cuentaMinRec(ls.get(i+1), 0, 0) > cuentaMinRec(g, 0, 0)) {
+				return Ej1RecFinal(ls, ls.get(i+1), i+1);
+			}
+			return Ej1RecFinal(ls, g, i + 1);
 		} else {
-			return Ej1RecFinal(ls, mayorMinusculas(ls), i++);
+			return Ej1RecFinal(ls,ls.get(i), i + 1);
 		}
 	}
-	
+
 //List<String> lineas = Files.lines(Paths.get("...\..\....txt")).collect(Collectors.toList());	
-	//cada linea forma partr de una parte de la lista 
-	
-	//List<String> lineas = Files.lines(Paths.get("PPI/src/Ejercicio1/fechas.txt")).collect(Collectors.toList());
+	// cada linea forma partr de una parte de la lista
+
+	// List<String> lineas =
+	// Files.lines(Paths.get("PPI/src/Ejercicio1/fechas.txt")).collect(Collectors.toList());
 	// -----------------------------------------------------------------------------------------------------
 	/*
 	 * public static String Ej1RecNoFinal(List<String> ls) { String n = null;
@@ -117,14 +137,17 @@ public class P1 {
 
 	public static void main(String[] args) {
 		List<String> b = new ArrayList<String>();
-		b.add("Alss");
-		b.add("Asaaaas");
-		b.add("Asaaaasaaaa");
+		b.add("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS");
+		b.add("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+		b.add("As");
 		b.add("aaaaaaaaaaaaaaaaaaa");
-		//System.out.println(Ej1While(b));
-		System.out.println(Ej1RecFinal(b,null,cuentaMinusculas(b.))));
+		b.add("");
+		b.add("assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+		// System.out.println(Ej1While(b));
+		System.out.println(Ej1RecFinal(b,"", 0));
 		// System.out.println(EjJava10(b));
 		// System.out.println(mayorMinusculas2(b));
+		//System.out.println(cuentaMinRec("AlddddGGGGffffb",0,0));
 	}
 
 	/*
