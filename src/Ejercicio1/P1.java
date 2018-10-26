@@ -1,7 +1,11 @@
 package Ejercicio1;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class P1 {
 	/*
@@ -45,34 +49,61 @@ public class P1 {
 
 	}
 
-//-----------------------------------------------------------------------------------------------------
-	public static String Ej1While(List<String> ls) {
+	public static String mayorMinusculas2(List<String> ls) {
 		Integer i = 0; // Contador letras
 		String f = null; // Contador String
 		while (i < (ls.size() - 1)) {
-			f = mayorMinusculas(ls);
+			if ((cuentaMinusculas(ls.get(i)) < cuentaMinusculas(ls.get(i + 1)))) {
+				f = ls.get(i + 1);
+			}
 			i++;
 		}
 		return f;
 
 	}
 
-	public static String EjJava10(List<String> ls) {
-		String res = mayorMinusculas(ls);
-		ls.forEach(p -> mayorMinusculas(ls));
-		return res;
+//--------------------------------------P1--------------------------------------------------------------
+	public static String Ej1While(List<String> ls) {
+		Integer i = 0; // Contador letras
+		String f = null; // Contador String
+		while (i < (ls.size() - 1)) {
+			if (cuentaMinusculas(ls.get(i)) < cuentaMinusculas(ls.get(i + 1))) {
+				f = ls.get(i + 1);
+			}
+			i++;
+		}
+		return f;
+
 	}
 
-	public static String Ej1RecNoFinal(List<String> ls, String g, Integer i) {
+	
+	 /* public static String EjJava10(List<String> ls) {
+		  return IntStream.rangeClosed(0,ls.size()-1)
+				  .boxed()
+				  .filter(x-> String.valueOf(cuentaMinusculas(ls.get(x))))
+				  .collect(Collectors.joining());
+	  }
+	 */
+
+	/*
+	 * public static String ejemploY(List<String> ls){ return ls.stream()
+	 * .max(Comparator.comparing(Ejemplos::ejemploX)) .get(); }
+	 */
+
+	public static String Ej1RecFinal(List<String> ls, String g, Integer i) {
 		if (ls.size() == 1) {
 			return ls.get(i);
 		} else if (i < ls.size() - 1) {
 			return g;
 		} else {
-			return Ej1RecNoFinal(ls, null, i++);
+			return Ej1RecFinal(ls, mayorMinusculas(ls), i++);
 		}
 	}
-
+	
+//List<String> lineas = Files.lines(Paths.get("...\..\....txt")).collect(Collectors.toList());	
+	//cada linea forma partr de una parte de la lista 
+	
+	//List<String> lineas = Files.lines(Paths.get("PPI/src/Ejercicio1/fechas.txt")).collect(Collectors.toList());
 	// -----------------------------------------------------------------------------------------------------
 	/*
 	 * public static String Ej1RecNoFinal(List<String> ls) { String n = null;
@@ -89,10 +120,11 @@ public class P1 {
 		b.add("Alss");
 		b.add("Asaaaas");
 		b.add("Asaaaasaaaa");
-		// System.out.println(Ej1While(b));
-		// System.out.println(cuentaMinusculas("Alberto"));
-		// System.out.println(Ej1RecNoFinal(b, mayorMinusculas(b), 0));
-		System.out.println(EjJava10(b));
+		b.add("aaaaaaaaaaaaaaaaaaa");
+		//System.out.println(Ej1While(b));
+		System.out.println(Ej1RecFinal(b,null,cuentaMinusculas(b.))));
+		// System.out.println(EjJava10(b));
+		// System.out.println(mayorMinusculas2(b));
 	}
 
 	/*
