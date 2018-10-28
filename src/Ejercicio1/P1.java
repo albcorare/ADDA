@@ -119,7 +119,12 @@ public class P1 {
 		}
 	}
 
-//List<String> lineas = Files.lines(Paths.get("...\..\....txt")).collect(Collectors.toList());	
+
+	
+	
+	
+	
+	//List<String> lineas = Files.lines(Paths.get("...\..\....txt")).collect(Collectors.toList());	
 	// cada linea forma partr de una parte de la lista
 
 	// List<String> lineas =
