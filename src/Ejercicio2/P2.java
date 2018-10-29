@@ -29,7 +29,7 @@ public class P2 {
 			FileWriter fichero = null;
 			try {
 
-				fichero = new FileWriter("ficheros/fichero_escrituraList2.txt");
+				fichero = new FileWriter("ficheros/fichero_escriturakjhjjkh.txt");
 
 				// Escribimos linea a linea en el fichero
 				for (String linea : ls) {

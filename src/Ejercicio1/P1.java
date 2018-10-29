@@ -3,9 +3,11 @@ package Ejercicio1;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class P1 {
 	/*
@@ -62,6 +64,8 @@ public class P1 {
 
 	}
 
+	//PROBLEMA 8 C
+	
 //--------------------------------------P1--------------------------------------------------------------
 	public static String Ej1While(List<String> ls) {
 		Integer i = 0; // Contador letras
@@ -118,8 +122,19 @@ public class P1 {
 			return Ej1RecFinal(ls,ls.get(i), i + 1);
 		}
 	}
+	
+	public static Integer Java10Cuenta(String n) {
+		return  (int) Stream.iterate(0,x->x+1)
+				.limit(n.length())
+				.filter(x->Character.isLowerCase(n.charAt(x)))
+				.count();
+	}
 
-
+	public static String Java10(List<String> n) {
+		return n.stream()
+				.max(Comparator.comparingInt(x->Java10Cuenta(x)))
+				.get();		
+	}
 	
 	
 	
@@ -148,11 +163,12 @@ public class P1 {
 		b.add("aaaaaaaaaaaaaaaaaaa");
 		b.add("");
 		b.add("assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-		// System.out.println(Ej1While(b));
+		System.out.println(Ej1While(b));
 		System.out.println(Ej1RecFinal(b,"", 0));
-		// System.out.println(EjJava10(b));
+		// System.out.println(Java10Cuenta("All"));
+		System.out.println(Java10(b));
 		// System.out.println(mayorMinusculas2(b));
-		//System.out.println(cuentaMinRec("AlddddGGGGffffb",0,0));
+		// System.out.println(cuentaMinRec("AlddddGGGGffffb",0,0));
 	}
 
 	/*
