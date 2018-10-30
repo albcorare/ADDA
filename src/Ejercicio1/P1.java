@@ -184,10 +184,10 @@ public class P1 {
 //		b.add("aaaaaaaaaaaaaaaaaaa");
 //		b.add("");
 //		b.add("assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-		//System.out.println(Ej1While(e1));
-		System.out.println(Ej1RecFinal1(e1,"", 0));
-		// System.out.println(Java10Cuenta("All"));
-		//System.out.println(Java10(e1));
+		System.out.println("Iterativo --> "+Ej1While(e1));
+		System.out.println("Recursivo Final --> "+Ej1RecFinal1(e1,"", 0));
+		//System.out.println(Java10Cuenta("All"));
+		System.out.println("Java 10 --> "+Java10(e1));
 		// System.out.println(mayorMinusculas2(b));
 		// System.out.println(cuentaMinRec("AlddddGGGGffffb",0,0));
 	}
