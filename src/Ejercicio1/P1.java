@@ -55,7 +55,7 @@ public class P1 {
 		Integer i = 0; // Contador letras
 		String f = null; // Contador String
 		while (i < (ls.size() - 1)) {
-			if ((cuentaMinusculas(ls.get(i)) < cuentaMinusculas(ls.get(i + 1)))) {
+			if ((cuentaMinusculas(ls.get(i)) < cuentaMinusculas(ls.get(i + 1))) ) {
 				f = ls.get(i + 1);
 			}
 			i++;
@@ -69,9 +69,9 @@ public class P1 {
 //--------------------------------------P1--------------------------------------------------------------
 	public static String Ej1While(List<String> ls) {
 		Integer i = 0; // Contador letras
-		String f = null; // Contador String
+		String f = ""; // Contador String
 		while (i < (ls.size() - 1)) {
-			if (cuentaMinusculas(ls.get(i)) < cuentaMinusculas(ls.get(i + 1))) {
+			if (cuentaMinusculas(ls.get(i)) < cuentaMinusculas(ls.get(i + 1)) && cuentaMinusculas(ls.get(i+1)) > cuentaMinusculas(f)) {
 				f = ls.get(i + 1);
 			}
 			i++;
@@ -108,19 +108,35 @@ public class P1 {
 	}
 	
 
-	public static String Ej1RecFinal(List<String> ls, String g, Integer i) {
+//	public static String Ej1RecFinal(List<String> ls, String g, Integer i) {
+//		if (ls.size() == 1) {
+//			return ls.get(i);
+//		}else if(ls.size()-1 == i) {
+//			return g;
+//		}else if (cuentaMinRec(ls.get(i), 0, 0) < cuentaMinRec(ls.get(i + 1), 0, 0)) {
+//			if(cuentaMinRec(ls.get(i+1), 0, 0) > cuentaMinRec(g, 0, 0)) {
+//				return Ej1RecFinal(ls, ls.get(i+1), i+1);
+//			}
+//			return Ej1RecFinal(ls, g, i + 1);
+//		} else {
+//			return Ej1RecFinal(ls,ls.get(i), i + 1);
+//		}
+//	}
+	
+	public static String Ej1RecFinal1(List<String> ls, String g, Integer i) {
 		if (ls.size() == 1) {
 			return ls.get(i);
 		}else if(ls.size()-1 == i) {
 			return g;
 		}else if (cuentaMinRec(ls.get(i), 0, 0) < cuentaMinRec(ls.get(i + 1), 0, 0)) {
 			if(cuentaMinRec(ls.get(i+1), 0, 0) > cuentaMinRec(g, 0, 0)) {
-				return Ej1RecFinal(ls, ls.get(i+1), i+1);
+				return Ej1RecFinal1(ls, ls.get(i+1), i+1);
 			}
-			return Ej1RecFinal(ls, g, i + 1);
-		} else {
-			return Ej1RecFinal(ls,ls.get(i), i + 1);
+			return Ej1RecFinal1(ls, g, i + 1);
+		} else if(cuentaMinRec(ls.get(i), 0, 0) > cuentaMinRec(g, 0, 0)) {
+				return Ej1RecFinal1(ls,ls.get(i), i + 1);
 		}
+		return g;
 	}
 	
 	public static Integer Java10Cuenta(String n) {
@@ -156,17 +172,22 @@ public class P1 {
 	// filter mayor numero de mayusculas
 
 	public static void main(String[] args) {
-		List<String> b = new ArrayList<String>();
-		b.add("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS");
-		b.add("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-		b.add("As");
-		b.add("aaaaaaaaaaaaaaaaaaa");
-		b.add("");
-		b.add("assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-		System.out.println(Ej1While(b));
-		System.out.println(Ej1RecFinal(b,"", 0));
+		List<String> e1 = new ArrayList<String>();
+		e1.add("aaaaaaa");
+		e1.add("eedf");
+		e1.add("aaaaasvdsvsdvsab");
+		e1.add("aaweFFFFsaaa");
+		e1.add("DDsssDDDD");
+//		b.add("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS");
+//		b.add("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+//		b.add("As");
+//		b.add("aaaaaaaaaaaaaaaaaaa");
+//		b.add("");
+//		b.add("assssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+		//System.out.println(Ej1While(e1));
+		System.out.println(Ej1RecFinal1(e1,"", 0));
 		// System.out.println(Java10Cuenta("All"));
-		System.out.println(Java10(b));
+		//System.out.println(Java10(e1));
 		// System.out.println(mayorMinusculas2(b));
 		// System.out.println(cuentaMinRec("AlddddGGGGffffb",0,0));
 	}
