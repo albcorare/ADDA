@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class P2 {
-	
+
 	// Dado un fichero de texto con una fecha escrita en cada línea, genere otro
 	// fichero con
 	// las fechas ordenadas y que estén entre dos fechas dadas.
@@ -45,40 +47,43 @@ public class P2 {
 //			}
 //			i++;
 //		}
+
+	// -------------------------------------------------------
+
+	public static List<LocalDate> creaFicheros(LocalDate z) throws IOException {
+		Integer i = 0;
+		BufferedReader bf = new BufferedReader(new FileReader("ficheros/fechas"));
+
+//		Stream<String> a = bf.lines();
+		String fecha = bf.readLine();// lee la linea
+//		String[] parts = fecha.split("/");// cortar fecha
+
+		//Integer lineas = (int) a.count();// numero de lineas de txt
+		LocalDate localDate1 = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));// pasa string a local
+																									// date
+
+		List<LocalDate> ls = new ArrayList<LocalDate>();
+		// ordenas fechas
+		Scanner s = new Scanner(bf);
+		Boolean lineaa = s.hasNextLine();
+		String linea = s.;
+
+		// Leemos linea a linea el fichero
 		
-		//-------------------------------------------------------
-		
-		
-		public static String creaFicheros() throws IOException{
-			Integer i = 0;
-			BufferedReader bf = new BufferedReader(new FileReader("ficheros/fechas"));
-			Stream<String> a = bf.lines();
-			String fecha = bf.readLine();
-			String[] parts = fecha.split("/");
-			
-			Integer lineas =  (int) a.count();
-			String nu = "19";
-			Integer numEntero = Integer.parseInt(parts[i]);
-			
-			while(i <= parts.length) {
-				
+		while (true) {
+			// Guardamos la linea en un String
+			if(s.) {
+				System.out.println(linea);
 			}
 			
-			while(i<= lineas) {
-				if(numEntero > 1) {
-					return "Lee";
-				}
-				i++;
-			}
-			return "no lee";
-	    }
-			
-	
-		
-	
+			System.out.println(linea);      // Imprimimos la linea
+		}
+
+
+	}
 
 	public static void main(String[] args) throws IOException {
-		System.out.println(creaFicheros());
+		System.out.println(creaFicheros(LocalDate.now()));
 	}
 
 }
