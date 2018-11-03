@@ -2,16 +2,19 @@ package Ejercicio2;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.*;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
 
 public class P2 {
 
@@ -19,71 +22,99 @@ public class P2 {
 	// fichero con
 	// las fechas ordenadas y que estén entre dos fechas dadas.
 
-//	public static void listaFechas() throws IOException {
-//		Integer i = 0;
-//		List<String> ls = new ArrayList<String>();
-//		//convertir string a local
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-//		BufferedReader bf2 = new BufferedReader(new FileReader("ficheros/fechas"));
-//		String date2 = null;
-//		//convert String to LocalDate
-//		LocalDate localDate = LocalDate.parse(date2, formatter);
-//		while((date2 = bf2.readLine()) != null) {
-//			ls.add(date2);
-//			FileWriter fichero = null;
-//			try {
-//
-//				fichero = new FileWriter("ficheros/fichero_escriturakjhjjkh.txt");
-//
-//				// Escribimos linea a linea en el fichero
-//				for (String linea : ls) {
-//					fichero.write(linea + "\n");
-//				}
-//
-//				fichero.close();
-//
-//			} catch (Exception ex) {
-//				System.out.println("Mensaje de la excepción: " + ex.getMessage());
-//			}
-//			i++;
-//		}
-
-	// -------------------------------------------------------
-
-	public static List<LocalDate> creaFicheros(LocalDate z) throws IOException {
+	public static List<LocalDate> listFechas(LocalDate fechamenor, LocalDate fechamayor){
 		Integer i = 0;
-		BufferedReader bf = new BufferedReader(new FileReader("ficheros/fechas"));
 
-//		Stream<String> a = bf.lines();
-		String fecha = bf.readLine();// lee la linea
-//		String[] parts = fecha.split("/");// cortar fecha
-
-		//Integer lineas = (int) a.count();// numero de lineas de txt
-		LocalDate localDate1 = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));// pasa string a local
-																									// date
-
-		List<LocalDate> ls = new ArrayList<LocalDate>();
-		// ordenas fechas
-		Scanner s = new Scanner(bf);
-		Boolean lineaa = s.hasNextLine();
-		String linea = s.;
-
-		// Leemos linea a linea el fichero
+		List<String> f = getLines("ficheros/fechas");// lista de fechas
+		List<LocalDate> lista = new ArrayList<>();
 		
-		while (true) {
-			// Guardamos la linea en un String
-			if(s.) {
-				System.out.println(linea);
+		while (i < f.size()) {
+			LocalDate localDate1 = LocalDate.parse(f.get(i), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			if(localDate1.isAfter(fechamenor) && localDate1.isBefore(fechamayor)) {
+				lista.add(localDate1);
 			}
-			
-			System.out.println(linea);      // Imprimimos la linea
+			i++;	
 		}
-
-
+		Collections.sort(lista);
+		return lista;
+		
+	}
+	
+	public static void While(LocalDate fechamenor, LocalDate fechamayor){
+		Integer i = 0;
+		while(i < listFechas(fechamenor, fechamayor).size()) {
+			String fecha = listFechas(fechamenor, fechamayor).toString();
+			toFile(fecha, "ficheros/fechas4");
+			i++;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//----------------------------------------------------------------------------------------	
+	public static void toFile(Stream<String> s, String file) {
+		try {
+			final PrintWriter f = 
+					new PrintWriter(new BufferedWriter(
+							new FileWriter(file)));
+			s.forEach(x->f.println(x));
+			f.close();
+		} catch (IOException e) {
+			throw new IllegalArgumentException(
+					"No se ha podido crear el fichero " + file);
+		}
+	}
+	
+	public static PrintWriter getWriter(String f) {
+		PrintWriter fout = null;
+		try {
+			fout = new PrintWriter(new BufferedWriter(new FileWriter(f)));
+		} catch (IOException e) {
+			System.err.println(e.toString());
+		}
+		return fout;
+	}
+	public static void toFile(String s, String file) {
+		try {
+			final PrintWriter f = 
+					new PrintWriter(new BufferedWriter(
+							new FileWriter(file)));
+			f.println(s);
+			f.close();
+		} catch (IOException e) {
+			throw new IllegalArgumentException(
+					"No se ha podido crear el fichero " + file);
+		}
+	}
+	
+	public static List<String> getLines(String f) {
+		List<String> lineas = null;
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+			lineas = bufferedReader.lines().collect(Collectors.toList());
+			bufferedReader.close();
+		} catch (IOException e) {
+			System.out.println(e.toString());
+		}
+		return lineas;
 	}
 
 	public static void main(String[] args) throws IOException {
-		System.out.println(creaFicheros(LocalDate.now()));
+		List<LocalDate> lista = new ArrayList<LocalDate>();
+		LocalDate menor = LocalDate.of(1996, 4, 10);
+		While(menor, LocalDate.now());
+		//System.out.println(recursivo(menor, LocalDate.now(), 0, lista));
+		
 	}
 
 }
