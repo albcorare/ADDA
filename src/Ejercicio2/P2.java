@@ -65,7 +65,23 @@ public class P2 {
 			lista.add(date);
 			 listFechasRec(fechamenor, fechamayor, i+1,lista);
 		}
-
+	}
+	
+	public static List<LocalDate> fechasJava10(LocalDate fechamenor, LocalDate fechamayor,Integer i
+			,List<LocalDate> lista ) {
+		List<String> f = getLines("ficheros/fechas");
+		
+		return IntStream.rangeClosed(0, f.size()-1)
+				.boxed()
+				.map(x-> LocalDate.parse(f.get(x), DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+				.collect(Collectors.toList());
+	}
+	
+	public static void fechasJava10(LocalDate fechamenor, LocalDate fechamayor){
+		List<LocalDate> lista = new ArrayList<LocalDate>();
+		 toFile( fechasJava10(fechamenor, fechamayor, 0, lista).stream()
+				 .filter(x-> x.isAfter(fechamenor) && x.isBefore(fechamayor))
+				 .collect(Collectors.toList()).toString(), "ficheros/fechasvicente3");
 		
 	}
 
@@ -134,7 +150,9 @@ public class P2 {
 		List<LocalDate> lista = new ArrayList<LocalDate>();
 		LocalDate menor = LocalDate.of(1996, 4, 10);
 		//While(menor, LocalDate.now());
-		listFechasRec(menor, LocalDate.now(), 0,lista);
+		//listFechasRec(menor, LocalDate.now(), 0,lista);
+		//System.out.println(fechasJava10(menor, LocalDate.now(), 0, lista));
+		fechasJava10(menor, LocalDate.now());
 		//listFechasRec2(menor, LocalDate.now());
 		//System.out.println(recursivo(menor, LocalDate.now(), 0, lista));
 		
