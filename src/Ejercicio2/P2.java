@@ -48,7 +48,7 @@ public class P2 {
 			i++;
 		}
 	}
-	public static List<LocalDate> listFechasRec(LocalDate fechamenor, LocalDate fechamayor,Integer i
+	public static void listFechasRec(LocalDate fechamenor, LocalDate fechamayor,Integer i
 			,List<LocalDate> lista ){
 		List<String> f = getLines("ficheros/fechas");
 		LocalDate date = LocalDate.parse(f.get(i), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -57,31 +57,17 @@ public class P2 {
 				lista.add(date);
 				Collections.sort(lista);
 				toFile(lista.toString(), "ficheros/fechasvicente2");
-
+				
 			}
-			return lista;
 		}else if(!(date.isAfter(fechamenor) && date.isBefore(fechamayor))){
-			return listFechasRec(fechamenor, fechamayor, i+1, lista);
+			 listFechasRec(fechamenor, fechamayor, i+1, lista);
 		}else {
 			lista.add(date);
-			return listFechasRec(fechamenor, fechamayor, i+1,lista);
+			 listFechasRec(fechamenor, fechamayor, i+1,lista);
 		}
 
 		
 	}
-//	public static void listFechasRec2(LocalDate fechamenor, LocalDate fechamayor){
-//		List<LocalDate> lista = new ArrayList<>();
-//		if(listFechasRec(fechamenor, fechamayor, 0, lista) == null) {
-//			System.out.println("La lista esta vacía");
-//		}else {
-//			List<LocalDate> q = listFechasRec(fechamenor, fechamayor, 0, lista);
-//			q.stream().distinct();
-//			if(listFechasRec(fechamenor, fechamayor, 0, lista) != null) {
-//				toFile(q.toString(), "ficheros/fechasvicente2");
-//			}
-//
-//		}
-//	}
 
 
 	
@@ -148,7 +134,7 @@ public class P2 {
 		List<LocalDate> lista = new ArrayList<LocalDate>();
 		LocalDate menor = LocalDate.of(1996, 4, 10);
 		//While(menor, LocalDate.now());
-		System.out.println(listFechasRec(menor, LocalDate.now(), 0,lista));
+		listFechasRec(menor, LocalDate.now(), 0,lista);
 		//listFechasRec2(menor, LocalDate.now());
 		//System.out.println(recursivo(menor, LocalDate.now(), 0, lista));
 		
