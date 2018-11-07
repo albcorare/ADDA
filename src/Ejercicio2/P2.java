@@ -44,7 +44,7 @@ public class P2 {
 		Integer i = 0;
 		while(i < listFechas(fechamenor, fechamayor).size()) {
 			String fecha = listFechas(fechamenor, fechamayor).toString();
-			toFile(fecha, "ficheros/fechas4");
+			toFile(fecha, "ficheros/fechasIterativo");
 			i++;
 		}
 	}
@@ -56,8 +56,7 @@ public class P2 {
 			if((date.isAfter(fechamenor) && date.isBefore(fechamayor))) {
 				lista.add(date);
 				Collections.sort(lista);
-				toFile(lista.toString(), "ficheros/fechasvicente2");
-				
+				toFile(lista.toString(), "ficheros/fechasRecursivo");
 			}
 		}else if(!(date.isAfter(fechamenor) && date.isBefore(fechamayor))){
 			 listFechasRec(fechamenor, fechamayor, i+1, lista);
@@ -65,6 +64,15 @@ public class P2 {
 			lista.add(date);
 			 listFechasRec(fechamenor, fechamayor, i+1,lista);
 		}
+	}
+	public static void listFechasRec2(LocalDate fechamenor, LocalDate fechamayor) {
+		List<LocalDate> lista = new ArrayList<>();
+		if(fechamenor.isAfter(fechamayor)) {
+			System.out.println("La fecha menor debe ser anterior a la fecha mayor");
+		}else {
+			listFechasRec(fechamenor, fechamayor, 0, lista);
+		}
+
 	}
 	
 	public static List<LocalDate> fechasJava10(LocalDate fechamenor, LocalDate fechamayor,Integer i
@@ -81,7 +89,7 @@ public class P2 {
 		List<LocalDate> lista = new ArrayList<LocalDate>();
 		 toFile( fechasJava10(fechamenor, fechamayor, 0, lista).stream()
 				 .filter(x-> x.isAfter(fechamenor) && x.isBefore(fechamayor))
-				 .collect(Collectors.toList()).toString(), "ficheros/fechasvicente3");
+				 .collect(Collectors.toList()).toString(), "ficheros/fechasJava10");
 		
 	}
 
@@ -149,11 +157,13 @@ public class P2 {
 	public static void main(String[] args) throws IOException {
 		List<LocalDate> lista = new ArrayList<LocalDate>();
 		LocalDate menor = LocalDate.of(1996, 4, 10);
-		//While(menor, LocalDate.now());
+		
+		
+		While(menor, LocalDate.now());
 		//listFechasRec(menor, LocalDate.now(), 0,lista);
 		//System.out.println(fechasJava10(menor, LocalDate.now(), 0, lista));
 		fechasJava10(menor, LocalDate.now());
-		//listFechasRec2(menor, LocalDate.now());
+		listFechasRec2(menor, LocalDate.now());
 		//System.out.println(recursivo(menor, LocalDate.now(), 0, lista));
 		
 	}
