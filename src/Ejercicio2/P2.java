@@ -83,12 +83,14 @@ public class P2 {
 				.boxed()
 				.map(x-> LocalDate.parse(f.get(x), DateTimeFormatter.ofPattern("dd/MM/yyyy")))
 				.collect(Collectors.toList());
+		
 	}
 	
 	public static void fechasJava10(LocalDate fechamenor, LocalDate fechamayor){
 		List<LocalDate> lista = new ArrayList<LocalDate>();
 		 toFile( fechasJava10(fechamenor, fechamayor, 0, lista).stream()
 				 .filter(x-> x.isAfter(fechamenor) && x.isBefore(fechamayor))
+				 .sorted()
 				 .collect(Collectors.toList()).toString(), "ficheros/fechasJava10");
 		
 	}
